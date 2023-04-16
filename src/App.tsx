@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import './assets/css/tailwind.css';
+// import './assets/css/style.css';
+// import "tailwindcss/tailwind.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+//
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import Drawer from './components/Drawer';
+import Error from './views/Error';
+import Index from './views/Index';
+import Products from './views/Products';
+import Fashion from './views/Fashion';
+import Cart from './views/Cart';
+import Accessory from './views/Accessory';
+import Digital from './views/Digital';
+
+import {ScrollToTop} from "./helpers/helpers";
+import {useRef} from 'react';
+import {useCartLoad} from "./composables/useCartLoad";
+
+const App = (): JSX.Element =>  {
+  const $hamburger = useRef<HTMLInputElement>(null);
+  const closeOverlay = () => {
+      $hamburger?.current?.click();
+  }
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+      <BrowserRouter>
+          <ScrollToTop />
+          <input type='checkbox' id='side-menu' className='drawer-toggle' ref={$hamburger}/>
+          <section className='drawer-content'>
+              <Nav/>
+              <section className='main pt-16'>
+                  <Routes>
+                      <Route path='*' element={<Error />} />
+                      <Route path='/' element={<Index />} />
+                      <Route path='/product/:id' element={<Products />} />
+                      <Route path='/cart' element={<Cart />} />
+                      <Route path='/fashion' element={<Fashion />} />
+                      <Route path='/accessory' element={<Accessory />} />
+                      <Route path='/digital' element={<Digital />} />
+                  </Routes>
+              </section>
+              <Footer />
+          </section>
+
+          <Drawer closeOverlay={closeOverlay}/>
+      </BrowserRouter>
+  );
 }
 
 export default App
