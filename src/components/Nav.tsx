@@ -11,13 +11,15 @@ const Nav = () : JSX.Element  => {
     const $html = document.querySelector('html');
     const themeDark = 'dark';
     const themeLight = 'light';
-    const [search, setSearch] = useState('');
-     // const [search, setSearch] = useRecoilValueLoadable(seaarch).contents;
-    // console.log(cartTotal)
-    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log("eventTTT", event)
-        setSearch(event?.target.value);
-    };
+
+    const menus = [
+        {name: 'fashion', title: '패션'},
+        {name: 'accessory', title: '액세서리'},
+        {name: 'digital', title: '디지털'},
+    ];
+
+
+
 
     const themeChange = (event: any) => {
         if(event.target.checked) {
@@ -62,9 +64,9 @@ const Nav = () : JSX.Element  => {
                     <a className="text-lg text-gray-700 dark:text-white font-bold whitespace-nowrap" href="/">React Shop</a>
                 </h1>
                 <div className="flex-none hidden md:flex md:flex-1 ml-2">
-                    <a className="btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white" href="/fashion">패션</a>
-                    <a className="btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white" href="/accessory">액세서리</a>
-                    <a className="btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white" href="/digital">디지털</a>
+                    {menus.map((menu) => {
+                        return (<Link to={menu.name} className='btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white'>{menu.title}</Link>)
+                    })}
                 </div>
                 <div className="flex items-center px-2" onClick={(event) => themeChange(event)}>
                     <label className="swap swap-rotate mr-2 sm:mr-4">
