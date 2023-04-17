@@ -1,8 +1,32 @@
-import {Carousel} from 'react-responsive-carousel';
+
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { Carousel } from 'react-responsive-carousel';
 
 const Slider = () : JSX.Element  =>  {
+    const onChange = (e) => {
+        console.log("chang: ", e)
+    }
+
+    const onClickItem = (e) => {
+        console.log("onClickItem: ", e)
+    }
+
+    const onClickThumb = (e) => {
+        console.log("onClickThumb: ", e)
+    }
+
     return (
-        <Carousel>
+        <Carousel className='flex flex-row' axis={"horizontal"} showArrows={false} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
+            <div className='left-auto right-auto bottom-1/3 mb-10 text-left w-full lg:container px-4 md:px-10'>
+                <img src="https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg" />
+            </div>
+            <div className='left-auto right-auto bottom-1/3 mb-10 text-left w-full lg:container px-4 md:px-10'>
+                <img src="https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg" />
+            </div>
+            <div className='left-auto right-auto bottom-1/3 mb-10 text-left w-full lg:container px-4 md:px-10'>
+                <img src="https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg" />
+            </div>
         </Carousel>
 
         // <div className="carousel-root carousel-container">
@@ -109,3 +133,5 @@ const Slider = () : JSX.Element  =>  {
 }
 
 export default Slider;
+
+

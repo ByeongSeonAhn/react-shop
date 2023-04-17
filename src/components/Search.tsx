@@ -24,7 +24,7 @@ const Search =() => {
     };
 
     const goSearchList = (event:any) => {
-        console.log("event: ", event)
+        console.log("goSearchList: ", event)
         if(40 === event.keyCode) {
             event.preventDefault();
             let $next = event.target.nextElementSibling;
@@ -41,15 +41,18 @@ const Search =() => {
 
 
     const changeTarget = (event:any) => {
-        console.log("event: ", event)
-        if(38 === event.keyCode) {
+        console.log("changeTarget: ", event)
+
+        if(38 === event.keyCode) { //keyup
             event.preventDefault();
             let $prev = event.target.parentElement.previousElementSibling;
+            console.log()
             if(!$prev) {
                 $search?.current?.focus();
                 return;
             }
-        } else if (40 == event.keyCode) {
+            $prev.querySelector($searchedItem).focus();
+        } else if (40 == event.keyCode) { //keydown
             event.preventDefault();
             let $next = event.target.parentElement.nextElementSibling;
             if(!$next) {
@@ -91,7 +94,7 @@ const Search =() => {
                     <path d="M1,1 h4" stroke="black" strokeLinecap="round" />
                 </svg>
             </button>
-            <input type='text' placeholder='검색' disabled={disabled} ref={$search} value={search} onChange={handleSearchChange} className='fixed left-0 top-4 -z-10 opacity-0 sm:opacity-100 sm:static sm:flex w-full input input-ghost focus:outline-0 rounded-none sm:rounded bg-gray-300 dark:bg-gray-600 !text-gray-800 dark:!text-white sm:transform-none transition-all js-searchInput'/>
+            <input type='text' placeholder='검색' disabled={disabled} ref={$search} value={search} onKeyUp={goSearchList} onKeyDown={goSearchList} onChange={handleSearchChange} className='fixed left-0 top-4 -z-10 opacity-0 sm:opacity-100 sm:static sm:flex w-full input input-ghost focus:outline-0 rounded-none sm:rounded bg-gray-300 dark:bg-gray-600 !text-gray-800 dark:!text-white sm:transform-none transition-all js-searchInput'/>
             <ul className='!fixed left-0 sm:!absolute sm:top-14 menu dropdown-content w-full sm:w-64 max-h-96 shadow text-base-content overflow-y-auto bg-white dark:bg-gray-600'>
                 {filterItems.map((product) => {
                   return (

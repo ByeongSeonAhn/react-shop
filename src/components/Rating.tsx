@@ -13,10 +13,12 @@ const Rating = ({rate,count} : Rating): JSX.Element => {
         <div className='flex items-center mt-3'>
             <div className='rating rating-half'>
                 {stars.map(($elm, index) => {
-                   return <input type='radio' name='rating-10' key={`rating${index}`} className={`bg-yellow-400 cursor`} />
+                    console.log("$el: ", $elm)
+                    console.log("index: ", index)
+                   return <input type='radio' name='rating-10' key={`rating${index}`} className='bg-yellow-400 cursor' />
                 })}
             </div>
-            <div className='mt-2'>
+            <div className='ml-2'>
                 {rate} / {count} 참여
             </div>
         </div>
