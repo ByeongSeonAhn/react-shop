@@ -4,20 +4,21 @@ import ReactDOM from 'react-dom';
 import { Carousel } from 'react-responsive-carousel';
 
 const Slider = () : JSX.Element  =>  {
-    const onChange = (event):any => {
-        console.log("chang: ", event)
-    }
-
-    const onClickItem = (event): any => {
-        console.log("onClickItem: ", event)
-    }
-
-    const onClickThumb = (event): any => { 
-        console.log("onClickThumb: ", event)
-    }
+    // const onChange = (event):any => {
+    //     console.log("chang: ", event)
+    // }
+    //
+    // const onClickItem = (event): any => {
+    //     console.log("onClickItem: ", event)
+    // }
+    //
+    // const onClickThumb = (event): any => {
+    //     console.log("onClickThumb: ", event)
+    // }
 
     return (
-        <Carousel className='flex flex-row' axis={"horizontal"} showArrows={false} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
+        // <Carousel className='flex flex-row' axis={"horizontal"} showArrows={false} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
+        <Carousel className='flex flex-row' axis={"horizontal"} showArrows={false}>
             <div className='left-auto right-auto bottom-1/3 mb-10 text-left w-full lg:container px-4 md:px-10'>
                 <img src="https://react-shop-oinochoe.vercel.app/img_shop_digital.jpeg" />
             </div>
