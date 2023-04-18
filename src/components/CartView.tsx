@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {toCurrencyFormat} from "../helpers/helpers";
-import {CartItems, cartList, cartTotal} from '../store/cart'
+import {cartCount, CartItems, cartList, cartTotal} from '../store/cart'
 import BreadCrumb from "./BreadCrumb";
 import CartList from "./CartList";
 import Confirm from "./Confirm";
@@ -11,7 +11,11 @@ const CartView = () : JSX.Element => {
     const cartLoadable = useRecoilValueLoadable<CartItems[]>(cartList);
     const cartItems: CartItems[] = 'hasValue' === cartLoadable.state ?  cartLoadable.contents :[];
     console.log("cartItems: " ,cartItems)
-    const totalPrice = useRecoilValueLoadable(cartTotal).contents;
+    const totalPriceLoadable = useRecoilValueLoadable<number>(cartTotal);
+    console.log("cartPriceLoadable ", totalPriceLoadable)
+    const totalPrice: number | any[] = 'hasValue' === totalPriceLoadable.state ? totalPriceLoadable.contents: 0;
+    console.log("totalPrice2: ", totalPriceLoadable)
+
 
     if('loading' === cartLoadable.state) {
         return <ProductsViewLoad />

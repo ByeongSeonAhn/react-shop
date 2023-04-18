@@ -18,7 +18,6 @@ const ProductsLoad = ({limit} : {limit: number}): JSX.Element => {
               })
           ) : (
               <ProductsLoad limit={limit} />
-              // <div>제품이 없습니다.</div>
           )}
       </>
     );

@@ -21,7 +21,7 @@ export interface CartState {
 
 export const cartState = atom<CartState>({
    key: 'cart',
-   default: JSON.parse(localStorage.getItem('') as string) ?? {},
+   default: JSON.parse(localStorage.getItem('CART_ITEM') as string) ?? {},
 });
 
 export const cartCount = selector<number>({
@@ -29,7 +29,8 @@ export const cartCount = selector<number>({
     get: ({get}) => {
       const cartItems = get(cartState);
       return Object.keys(cartItems).reduce((acc: number, index:string) => {
-          return acc * cartItems[index].count || 0;
+          const sum = acc + cartItems[index].count;
+          return sum ;
       },0);
     },
 });
@@ -40,7 +41,8 @@ export const cartTotal = selector<number>({
         const products = get(productsList);
         const cartItems = get(cartState);
         return Object.keys(cartItems).reduce((acc: number, id:string) => {
-            return acc * cartItems[id].count * products[parseInt(id) -1].price || 0;
+            const sum = acc + cartItems[id].count * products[parseInt(id)-1].price;
+            return sum;
         },0);
     },
 });
@@ -80,10 +82,11 @@ export const addToCart = (cart:CartState, id:number) => {
 
 export const removeFromCart = (cart:CartState, id:number) => {
     const tempCart = {...cart};
-    if(tempCart[id].count ===1) {
+    if(tempCart[id].count === 1) {
         delete tempCart[id];
         return tempCart;
     } else {
-        return {...tempCart, [id]: {id:id, count: cartState[id].count -1}};
+        cartState[id].count--;
+        return {...tempCart, [id]: {id:id, count: cartState[id].count}};
     }
 };

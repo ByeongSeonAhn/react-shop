@@ -24,7 +24,7 @@ const App = (): JSX.Element =>  {
   const closeOverlay = () => {
       $hamburger?.current?.click();
   }
-
+  useCartLoad();
   return (
       <BrowserRouter>
           <ScrollToTop />

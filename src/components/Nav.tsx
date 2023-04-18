@@ -1,24 +1,25 @@
 import {ChangeEvent, useEffect, useRef, useState} from "react";
 import theme from "tailwindcss/defaultTheme";
 import {Link} from "react-router-dom";
-import {cartTotal} from "../store/cart";
+import {cartCount, cartTotal} from "../store/cart";
 import {useRecoilValueLoadable} from "recoil";
 import Search from "./Search";
+import {Product, productsList} from "../store/products";
 
 const Nav = () : JSX.Element  => {
     const $html = document.querySelector('html');
     const themeDark = 'dark';
     const themeLight = 'light';
-    const totalPrice = useRecoilValueLoadable(cartTotal).contents;
-    // console.log("tatalPrice: ", totalPrice)
+    const cartTotalLoadable = useRecoilValueLoadable<number>(cartCount);
+    console.log("cartTotalCount ", cartTotalLoadable)
+    const cartsTotal: number | any[] = 'hasValue' === cartTotalLoadable.state ? cartTotalLoadable.contents: [];
+    console.log("cartsTotal: ", cartsTotal)
 
     const menus = [
         {name: 'fashion', title: '패션'},
         {name: 'accessory', title: '액세서리'},
         {name: 'digital', title: '디지털'},
     ];
-
-
 
 
     const themeChange = (event: any) => {
@@ -88,7 +89,7 @@ const Nav = () : JSX.Element  => {
                             </svg>
                             <span
                                 className="inline-flex items-center justify-center absolute top-0 right-0 px-2 py-1 rounded-full bg-red-500 text-xs font-bold leading-none text-gray-200 transform translate-x-1/2 -translate-y-1/2">
-                                0
+                                {cartsTotal}
                             </span>
                         </span>
                     </Link>

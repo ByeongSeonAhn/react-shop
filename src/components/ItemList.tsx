@@ -1,5 +1,3 @@
-// 중간점검 1차 39분 34초
-
 import {Product, productsList} from "../store/products";
 import React,{Suspense} from "react";
 import {useRecoilValueLoadable} from "recoil";
@@ -23,7 +21,7 @@ const ItemList = ({title, limit, scroll}: Items): JSX.Element => {
     const ProductsList = React.lazy(() => import('./ProductsList'));
     const ProductsLoadable = useRecoilValueLoadable<Product[]>(productsList);
     let products: Product[] ='hasValue' === ProductsLoadable.state ? ProductsLoadable.contents: [];
-    //slice 확인필요
+
     switch(title) {
         case '패션':
             products = products.filter((item) => item.category === "men's clothing" || item.category === "women's clothing" ).slice(0,limit);
@@ -41,7 +39,6 @@ const ItemList = ({title, limit, scroll}: Items): JSX.Element => {
     return (
         <>
             <h2 className='mb-5 lg:mb-8 text-3xl lg:text-4xl text-center font-bold'>{title}</h2>
-            {/* data-scroll 확인필요*/}
             <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4 item_list' data-scroll={true}>
                 <Suspense fallback={<ProductsLoad limit={limit} />}>
                     <ProductsList products={products} limit={limit} />

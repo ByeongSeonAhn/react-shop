@@ -15,7 +15,8 @@ const CartList = ({data}: Item) : JSX.Element => {
     const [cart, setCart] = useRecoilState<CartState>(cartState);
 
     const removeFromCartHandler = (id: number) => {
-        setCart(removeFromCart(cart, id));
+       setCart(removeFromCart(cart, id))
+        // setCart({...cart,[id]:{id: id, count:(cart[id].count <= 0 ? 0 : cart[id].count -1)}});
     }
 
     const addToCartHandler = (id: number) => {
