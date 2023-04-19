@@ -19,13 +19,13 @@ export interface CartState {
     items: Record<string | number, CartInfo>;
 }
 
+//[장바구니: 상태]
 export const cartState = atom<CartState>({
    key: 'cart',
-   default: JSON.parse(localStorage.getItem('CART_ITEM') as string) ?? {},
+   default: JSON.parse(localStorage.getItem('') as string) ?? {},
 });
 
-
-//[장바구니:토탈 갯수]
+//[장바구니: 전체개수]
 export const cartCount = selector<number>({
     key: 'cartCount',
     get: ({get}) => {
@@ -37,7 +37,7 @@ export const cartCount = selector<number>({
     },
 });
 
-//[장바구니:토탈 갯수]
+//[장바구니: 전체가격]
 export const cartTotalPrice = selector<number>({
     key: 'cartTotalPrice',
     get: ({get}) => {
@@ -51,6 +51,7 @@ export const cartTotalPrice = selector<number>({
 });
 
 
+//[장바구니:목록]
 export const cartList = selector<CartItems[]>({
     key: 'cartList',
     get: ({get}) => {
@@ -69,6 +70,7 @@ export const cartList = selector<CartItems[]>({
     },
 });
 
+//[장바구니: 추가]
 export const addToCart = (cart:CartState, id:number) => {
     if (!cartState[id]) {
         cartState[id] = {
@@ -83,13 +85,13 @@ export const addToCart = (cart:CartState, id:number) => {
 };
 
 
+//[장바구니: 삭제]
 export const removeFromCart = (cart:CartState, id:number) => {
     const tempCart = {...cart};
     if(tempCart[id].count === 1) {
         delete tempCart[id];
         return tempCart;
     } else {
-        cartState[id].count--;
-        return {...tempCart, [id]: {id:id, count: cartState[id].count}};
+        return {...tempCart, [id]: {id:id, count: cartState[id].count--}};
     }
 };
