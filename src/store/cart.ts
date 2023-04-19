@@ -22,7 +22,7 @@ export interface CartState {
 //[장바구니: 상태]
 export const cartState = atom<CartState>({
    key: 'cart',
-   default: JSON.parse(localStorage.getItem('') as string) ?? {},
+   default: JSON.parse(localStorage.getItem('CART_ITEM') as string) ?? {},
 });
 
 //[장바구니: 전체개수]
@@ -77,7 +77,6 @@ export const addToCart = (cart:CartState, id:number) => {
             id,
             count: 1,
         };
-
         return {...cart, [id]: {id, count: 1,}};
     }
     cartState[id].count++;
