@@ -2,7 +2,9 @@ import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {Product, productsList} from "../store/products";
 import {useNavigate} from "react-router-dom";
 import {useRecoilValueLoadable} from "recoil";
+import {KeyCode} from "../constants/keycode";
 
+//[검색]
 const Search =() => {
     const navigate = useNavigate();
     const ProductsLoadable = useRecoilValueLoadable<Product[]>(productsList);
@@ -14,25 +16,24 @@ const Search =() => {
     const $searchedItem = '.js-searchedItem'
 
     const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log("eventL ", event)
         setSearch(event?.target.value);
     };
 
+    //[상품이동]
     const goLink = (id: number) => {
         setSearch('');
         navigate(`/product/${id}`)
     };
 
     const goSearchList = (event:any) => {
-        console.log("goSearchList: ", event)
-        if(40 === event.keyCode) {
+        if(KeyCode.keyDown === event.keyCode) { //keydown
             event.preventDefault();
             let $next = event.target.nextElementSibling;
             if(!$next || !$next.querySelector($searchedItem)) {
                 return;
             }
             $next.querySelector($searchedItem).focus();
-        } else if (14 == event.keyCode) {
+        } else if (KeyCode.enter == event.keyCode) {  //enter
             event.preventDefault();
             let $next = event.target.nextElementSibling.querySelector('li a');
             !!$next && $next.click();
@@ -40,19 +41,17 @@ const Search =() => {
     };
 
 
+    //[키워드 나열]
     const changeTarget = (event:any) => {
-        console.log("changeTarget: ", event)
-
-        if(38 === event.keyCode) { //keyup
+        if(KeyCode.keyUp === event.keyCode) { //keyup
             event.preventDefault();
             let $prev = event.target.parentElement.previousElementSibling;
-            console.log()
             if(!$prev) {
                 $search?.current?.focus();
                 return;
             }
             $prev.querySelector($searchedItem).focus();
-        } else if (40 == event.keyCode) { //keydown
+        } else if (KeyCode.keyDown == event.keyCode) { //keydown
             event.preventDefault();
             let $next = event.target.parentElement.nextElementSibling;
             if(!$next) {
@@ -86,7 +85,6 @@ const Search =() => {
         }
     },[ProductsLoadable.state]);
 
-    //이쪽 구현하기
     return (
         <div className='dropdown'>
             <button type='button' onClick={toggleSearch} className='flex sm:hidden w-10 sm:w-auto mx-0 px-0 sm:mx-2 sm:px-2 btn btn-ghost js-search'>

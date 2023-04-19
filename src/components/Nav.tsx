@@ -1,19 +1,18 @@
 import {ChangeEvent, useEffect, useRef, useState} from "react";
 import theme from "tailwindcss/defaultTheme";
 import {Link} from "react-router-dom";
-import {cartCount, cartTotal} from "../store/cart";
+import {cartCount} from "../store/cart";
 import {useRecoilValueLoadable} from "recoil";
 import Search from "./Search";
 import {Product, productsList} from "../store/products";
 
+//[상단:네비게이션]
 const Nav = () : JSX.Element  => {
     const $html = document.querySelector('html');
     const themeDark = 'dark';
     const themeLight = 'light';
     const cartTotalLoadable = useRecoilValueLoadable<number>(cartCount);
-    console.log("cartTotalCount ", cartTotalLoadable)
     const cartsTotal: number | any[] = 'hasValue' === cartTotalLoadable.state ? cartTotalLoadable.contents: [];
-    console.log("cartsTotal: ", cartsTotal)
 
     const menus = [
         {name: 'fashion', title: '패션'},
@@ -22,6 +21,7 @@ const Nav = () : JSX.Element  => {
     ];
 
 
+    //[테마변경]
     const themeChange = (event: any) => {
         if(event.target.checked) {
             setLight();
@@ -52,6 +52,7 @@ const Nav = () : JSX.Element  => {
 
     },[]);
 
+    //[네비게이션]
     return (
         <div className='fixed z-10 w-full navbar shadow-lg bg-white dark:bg-neutral text-neutral-content'>
             <div className='flex w-full xl:container xl:m-auto'>
@@ -62,11 +63,11 @@ const Nav = () : JSX.Element  => {
                     </svg>
                 </label>
                 <h1 className="shrink-0 flex md:flex-none flex-1 mx-1 sm:mx-2">
-                    <a className="text-lg text-gray-700 dark:text-white font-bold whitespace-nowrap" href="/">React Shop</a>
+                    <Link to={"/"} className="text-lg text-gray-700 dark:text-white font-bold whitespace-nowrap">React Shop</Link>
                 </h1>
                 <div className="flex-none hidden md:flex md:flex-1 ml-2">
                     {menus.map((menu) => {
-                        return (<Link to={menu.name} className='btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white'>{menu.title}</Link>)
+                        return (<Link to={menu.name} className='btn btn-ghost btn-sm rounded-btn text-gray-700 dark:text-white' key={menu.title}>{menu.title}</Link>)
                     })}
                 </div>
                 <div className="flex items-center px-2" onClick={(event) => themeChange(event)}>

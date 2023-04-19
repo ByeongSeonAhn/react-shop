@@ -24,6 +24,8 @@ export const cartState = atom<CartState>({
    default: JSON.parse(localStorage.getItem('CART_ITEM') as string) ?? {},
 });
 
+
+//[장바구니:토탈 갯수]
 export const cartCount = selector<number>({
     key: 'cartCount',
     get: ({get}) => {
@@ -35,8 +37,9 @@ export const cartCount = selector<number>({
     },
 });
 
-export const cartTotal = selector<number>({
-    key: 'cartTotal',
+//[장바구니:토탈 갯수]
+export const cartTotalPrice = selector<number>({
+    key: 'cartTotalPrice',
     get: ({get}) => {
         const products = get(productsList);
         const cartItems = get(cartState);

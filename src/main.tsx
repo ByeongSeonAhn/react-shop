@@ -5,7 +5,7 @@ import {CART_ITEM} from './composables/useCartLoad';
 import {cartState} from './store/cart';
 import App from './App';
 
-
+//렌더링 초기
 const container: any = document.getElementById('app');
 const root = createRoot(container);
 const initialValue = JSON.parse(localStorage.getItem(CART_ITEM) as string) ?? {};

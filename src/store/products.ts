@@ -19,6 +19,7 @@ export interface Product {
     rating: Rating;
 }
 
+//[제품리스트]
 export const productsList = selector<Product[]> ({
     key: 'productsLit',
     get: async () => {

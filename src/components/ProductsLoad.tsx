@@ -1,3 +1,4 @@
+//[여러 상품 로드]
 const ProductsLoad = ({limit} : {limit: number}): JSX.Element => {
     return (
       <>

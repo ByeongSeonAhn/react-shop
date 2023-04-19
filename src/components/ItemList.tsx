@@ -17,6 +17,8 @@ const defaultProps = {
     data: [],
     scroll:false,
 }
+
+//[상품리스트: view 설정]
 const ItemList = ({title, limit, scroll}: Items): JSX.Element => {
     const ProductsList = React.lazy(() => import('./ProductsList'));
     const ProductsLoadable = useRecoilValueLoadable<Product[]>(productsList);

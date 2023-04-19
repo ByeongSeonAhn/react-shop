@@ -1,9 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './assets/css/tailwind.css';
 import './assets/css/style.css';
-// import "tailwindcss/tailwind.css";
-
-//
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Drawer from './components/Drawer';
@@ -14,8 +11,7 @@ import Fashion from './views/Fashion';
 import Cart from './views/Cart';
 import Accessory from './views/Accessory';
 import Digital from './views/Digital';
-
-import {ScrollToTop} from "./helpers/helpers";
+import {ScrollToTop} from "./util/helpers";
 import {useRef} from 'react';
 import {useCartLoad} from "./composables/useCartLoad";
 
@@ -24,8 +20,10 @@ const App = (): JSX.Element =>  {
   const closeOverlay = () => {
       $hamburger?.current?.click();
   }
+  //장바구니 상태 로드
   useCartLoad();
   return (
+      //Link: 라우팅 경로 지정
       <BrowserRouter>
           <ScrollToTop />
           <input type='checkbox' id='side-menu' className='drawer-toggle' ref={$hamburger}/>

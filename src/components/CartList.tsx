@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {CartItems, CartState, cartState, removeFromCart} from '../store/cart';
-import {toCurrencyFormat} from '../helpers/helpers';
+import {toCurrencyFormat} from '../util/helpers';
 import {useRecoilState} from "recoil";
 
 type Item = {
@@ -11,14 +11,17 @@ const defaultProps = {
   data: [],
 };
 
+//[장바구니: 제품이 있는 경우]
 const CartList = ({data}: Item) : JSX.Element => {
     const [cart, setCart] = useRecoilState<CartState>(cartState);
 
+    //[장바구니 삭제]
     const removeFromCartHandler = (id: number) => {
        setCart(removeFromCart(cart, id))
         // setCart({...cart,[id]:{id: id, count:(cart[id].count <= 0 ? 0 : cart[id].count -1)}});
     }
 
+    //[장바구니 추가]
     const addToCartHandler = (id: number) => {
         setCart({...cart,[id]:{id: id, count:(cart[id].count || 0) + 1}});
     }

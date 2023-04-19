@@ -10,6 +10,7 @@ const defaultProps = {
     crumb: '',
 };
 
+//[개별 상품 클릭시 상단 Description]
 const BreadCrumb = ({category,crumb}: BreadCrumbs) : JSX.Element => {
     return (
         <div className={'text-sm breadcrumbs'}>

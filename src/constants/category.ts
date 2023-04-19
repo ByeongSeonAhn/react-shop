@@ -5,4 +5,4 @@ export const Category: any = {
     jewelery : '액세서리',
 } as const;
 
-type categoryType = typeof Category[keyof typeof Category];
+export type categoryType = typeof Category[keyof typeof Category];

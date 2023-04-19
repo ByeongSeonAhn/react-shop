@@ -1,6 +1,7 @@
 import Slider from '../components/Slider';
 import ItemList from '../components/ItemList';
 
+//[메인: 홈화면]
 const Index = (): JSX.Element => {
     return (
         <>

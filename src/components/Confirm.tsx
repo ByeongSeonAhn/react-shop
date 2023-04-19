@@ -1,7 +1,7 @@
 import {useRecoilState} from "recoil";
 import {CartState, cartState} from "../store/cart";
-import CartList from "./CartList";
 
+//[장바구니: 확인]
 const Confirm = () : JSX.Element => {
     const [cart, setCart] = useRecoilState<CartState>(cartState);
     const buyItems = () => setCart({} as CartState);

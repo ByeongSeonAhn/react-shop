@@ -7,6 +7,8 @@ const defaultProps = {
     rate: 0,
     count: 0,
 }
+
+//[상품:별점]
 const Rating = ({rate,count} : Rating): JSX.Element => {
     const stars = Array.from(Array(10));
     return (
@@ -15,7 +17,7 @@ const Rating = ({rate,count} : Rating): JSX.Element => {
                 {stars.map(($elm, index) => {
                     let cls = ""
 
-                    if(index + 1 < rate*2) { //yellow 적용
+                    if(index + 1 < rate*2) { //bg-yellow-400 적용
                         if(index%2 == 0){
                             cls = "bg-yellow-400 cursor-default mask mask-star-2 mask-half-1"
                         } else {

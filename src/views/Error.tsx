@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 
+//[오류 발생]
 const Error = (): JSX.Element => {
     return (
         <>

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-
+//[사이드메뉴]
 const Drawer = ({closeOverlay} : any) : JSX.Element => {
     const menus = [
         {name: 'fashion', title: '패션'},

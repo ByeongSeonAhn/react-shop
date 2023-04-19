@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
-import {toCurrencyFormat} from "../helpers/helpers";
+import {toCurrencyFormat} from "../util/helpers";
 import type {Product} from "../store/products";
 import ProductsLoad from "./ProductsLoad";
 
+//[상품리스트: 상품배열]
 const ProductsList = ({products, limit}: {products: Product[]; limit: number}): JSX.Element => {
     return (
         <>

@@ -5,8 +5,9 @@ import {Link, useParams} from "react-router-dom";
 import Rating from "./Rating";
 import {useRecoilState, useRecoilValueLoadable} from "recoil";
 import {addToCart, CartState, cartState} from "../store/cart";
-import {toCurrencyFormat} from "../helpers/helpers";
+import {toCurrencyFormat} from "../util/helpers";
 
+//[상품:개별]
 const ProductsView = (): JSX.Element => {
     const ProductsLoadable = useRecoilValueLoadable<Product[]>(productsList)
     const products:Product[] = 'hasValue' === ProductsLoadable.state ? ProductsLoadable.contents: [];

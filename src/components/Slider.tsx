@@ -5,8 +5,8 @@ import fashionImg from "../assets/img/img_shop_fashion.jpeg";
 import digitalImg from "../assets/img/img_shop_digital.jpeg";
 import groceryImg from "../assets/img/img_shop_grocery.jpeg";
 
+//[메인화면: 캐러셀]
 const Slider = () : JSX.Element  =>  {
-
     return (
         <Carousel className='main-slide' showArrows={true}  showThumbs={false} showStatus={false}>
             <div className='carousel-slide'>
